@@ -50,6 +50,7 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: 'An account with this email already exists' });
     }
 
+    const userId = `u-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
     const newUser = { id: userId, email: emailLower, username: finalUsername, password_hash: passwordHash, created_at: new Date().toISOString() };
     memoryDb.users.push(newUser);
 
@@ -57,7 +58,7 @@ export const register = async (req, res) => {
     return res.status(201).json({ token, user: { id: newUser.id, email: newUser.email, username: newUser.username } });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ error: 'Failed to create user account', details: error.message });
+    res.status(500).json({ error: error.message || 'Failed to create user account', details: error.message });
   }
 };
 

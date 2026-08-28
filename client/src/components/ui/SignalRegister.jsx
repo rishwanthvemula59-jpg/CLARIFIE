@@ -129,7 +129,9 @@ export const SignalRegister = () => {
       await register(email, password, username);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed. Try a different email.');
+      const serverErr = err.response?.data?.error;
+      const serverDetails = err.response?.data?.details;
+      setError(serverDetails ? `${serverErr}: ${serverDetails}` : (serverErr || 'Registration failed. Try a different email.'));
     } finally {
       setLoading(false);
     }
