@@ -60,6 +60,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Clarifie Forensic Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Clarifie Forensic Server running on port ${PORT}`);
+  });
+}
+
+// Export for serverless environments (like Vercel)
+export default app;
