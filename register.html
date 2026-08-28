@@ -246,10 +246,11 @@
           <h1 class="col center" id="h1" style="text-transform: uppercase; font-weight: 800;">CREATE ACCOUNT</h1>
           <p class="col center" id="sub" style="text-transform: uppercase; font-weight: 600;"><b>START FREE</b> TO CONTINUOUSLY MONITOR YOUR SIGNALS.</p>
           <div class="field" id="email">
-            <input type="email" autocomplete="email" aria-label="Email address" placeholder="Eg. johndoe@gmail.com" />
+            <input type="email" id="emailInput" name="email" autocomplete="email" aria-label="Email address" placeholder="Eg. johndoe@gmail.com" />
           </div>
-          <div class="field" id="pw">
-            <input type="password" autocomplete="new-password" aria-label="Password" placeholder="Create Password" />
+          <div class="field" id="pw" style="display: flex; align-items: center; padding-right: 12px;">
+            <input type="password" id="pwInput" name="password" autocomplete="new-password" aria-label="Password" placeholder="Create Password" style="flex: 1;" />
+            <button type="button" id="togglePw" style="background: none; border: none; cursor: pointer; padding: 4px; color: #606060; font-size: 16px;" aria-label="Toggle password visibility">👁️</button>
           </div>
           <button type="button" id="loginBtn" style="text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em;">
             <span>CREATE ACCOUNT</span>
@@ -265,6 +266,20 @@
 
   <script>
     (function () {
+      var togglePw = document.getElementById('togglePw');
+      var pwInput = document.getElementById('pwInput');
+      if (togglePw && pwInput) {
+        togglePw.addEventListener('click', function () {
+          if (pwInput.type === 'password') {
+            pwInput.type = 'text';
+            togglePw.textContent = '🙈';
+          } else {
+            pwInput.type = 'password';
+            togglePw.textContent = '👁️';
+          }
+        });
+      }
+
       var REF_W=1464, REF_H=949, PHOTO_W=836, PANE_W=628, CARD_W=613, CARD_H=922;
       var CONTENT_H=697;
       var IMG_W=1177, IMG_H=1336, IMG_REF_SCALE=836/1177;
