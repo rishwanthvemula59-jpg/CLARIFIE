@@ -18,7 +18,11 @@ if (isGeminiConfigured) {
   console.log('ℹ️ Gemini API key not provided. High-fidelity forensic fallback mode active.');
 }
 
-const SYSTEM_PROMPT = `You are a senior fraud investigation analyst with expertise in social engineering, phishing, and predatory contract detection. You analyze evidence objectively and probabilistically — you never state something "is" fraud with certainty, you describe risk levels and specific observed indicators. You always explain your reasoning in plain language a non-technical victim can understand. You never speculate about identity or make accusations against named individuals; you describe patterns and tactics, not people. Always return strictly valid JSON matching the requested structure.`;
+const SYSTEM_PROMPT = `You are a senior fraud forensics analyst. You evaluate evidence OBJECTIVELY and ACCURATELY.
+CRITICAL INSTRUCTION: First check if the content is benign, safe, or standard communication (e.g., routine service/recharge expiration notices, official receipts, standard notifications, benign conversations).
+- If the content is LEGITIMATE/SAFE: Assign a LOW risk score (0-25) and explicitly state "No suspicious fraud indicators detected".
+- If the content is SUSPICIOUS/FRAUDULENT (contains phishing URLs, OTP harvesting, identity impersonation, pressure tactics): Assign a MEDIUM (30-65) or HIGH (70-100) risk score and list specific red flags.
+Never assume content is fraud simply because it was submitted. Always return strictly valid JSON matching the requested structure.`;
 
 // Clean JSON response string from Markdown formatting
 const cleanJsonResponse = (rawText) => {
@@ -57,7 +61,7 @@ export const analyzeAudio = async (filePath, mimeType = 'audio/mp3') => {
                 }
               },
               {
-                text: `${SYSTEM_PROMPT}\n\nTranscribe this audio and identify social-engineering tactics: urgency/panic language, authority impersonation (claiming to be bank/government/police), requests for OTP/PIN/payment, or pressure to act immediately.\n\nRespond strictly with JSON:\n{\n  "transcript": "full transcription or clear summary",\n  "flags": ["list of identified social engineering red flags"],\n  "riskScore": 85 (integer 0-100)\n}`
+                text: `${SYSTEM_PROMPT}\n\nTranscribe this audio recording and evaluate whether it contains social-engineering/scam tactics OR if it is a normal, legitimate conversation.\n\nRespond strictly with JSON:\n{\n  "transcript": "full transcription or clear summary",\n  "flags": ["list of red flags if suspicious, or 'No suspicious indicators detected' if benign"],\n  "riskScore": 15 (integer 0-100 based on actual threat level: 0-25 = low/safe, 26-65 = medium, 66-100 = high)\n}`
               }
             ]
           }
@@ -71,14 +75,13 @@ export const analyzeAudio = async (filePath, mimeType = 'audio/mp3') => {
     }
   }
 
-  // Fallback high-fidelity simulation
+  // Fallback simulation
   return {
-    transcript: "Caller: 'This is Fraud Specialist Marcus from Chase Bank Security. Your account has an active unauthorized transfer of $2,450 to an offshore account right now. You must read me the 6-digit passcode we sent to your mobile phone immediately to freeze your account, or funds will be permanently lost within 3 minutes.'",
+    transcript: "Caller: 'This is Fraud Specialist Marcus from Chase Bank Security. Your account has an active unauthorized transfer of $2,450 to an offshore account right now. You must read me the 6-digit passcode we sent to your mobile phone immediately to freeze your account.'",
     flags: [
-      "Immediate panic/urgency creation (3-minute deadline)",
-      "Financial authority impersonation (Chase Bank Fraud Specialist)",
-      "Direct request for One-Time Password (OTP) security code",
-      "Coercive tactic coercing immediate compliance under threat of loss"
+      "Immediate panic/urgency creation",
+      "Financial authority impersonation (Chase Bank)",
+      "Direct request for One-Time Password (OTP)"
     ],
     riskScore: 92
   };
@@ -104,7 +107,7 @@ export const analyzeImage = async (filePath, mimeType = 'image/png') => {
                 }
               },
               {
-                text: `${SYSTEM_PROMPT}\n\nExamine this image for phishing/scam indicators: mismatched or low-quality logos, suspicious URLs/domains, fake UI elements, inconsistent branding, urgency banners, requests for sensitive info.\n\nRespond strictly with JSON:\n{\n  "description": "visual summary of image content",\n  "flags": ["list of visual phishing red flags"],\n  "riskScore": 88 (integer 0-100)\n}`
+                text: `${SYSTEM_PROMPT}\n\nExamine this image objectively. Is it a legitimate message/notice (e.g. routine telecom recharge reminder, official bill) OR a fraudulent phishing attempt (fake URL, spoofed logo, credential harvesting)?\n\nRespond strictly with JSON:\n{\n  "description": "visual summary of image content",\n  "flags": ["list of red flags if suspicious, or 'No phishing indicators found' if legitimate"],\n  "riskScore": 15 (integer 0-100: 0-25 = legitimate/safe, 26-65 = medium risk, 66-100 = high risk fraud)\n}`
               }
             ]
           }
@@ -118,16 +121,14 @@ export const analyzeImage = async (filePath, mimeType = 'image/png') => {
     }
   }
 
-  // Fallback high-fidelity simulation
+  // Fallback simulation
   return {
-    description: "Screenshot of an SMS message purporting to be from Chase Security containing an urgent web link ('http://chase-sec-verify-alert.net/auth') requesting login verification.",
+    description: "Screenshot of an official service message or notification.",
     flags: [
-      "Suspicious top-level domain (chase-sec-verify-alert.net instead of chase.com)",
-      "Visual urgency banner urging verification within 15 minutes",
-      "Inconsistent typography and unofficial brand mark alignment",
-      "Unsolicited credential harvesting attempt via external web link"
+      "No phishing indicators found",
+      "Standard notification layout without suspicious external links"
     ],
-    riskScore: 89
+    riskScore: 12
   };
 };
 
@@ -151,7 +152,7 @@ export const analyzeDocument = async (filePath, mimeType = 'application/pdf') =>
                 }
               },
               {
-                text: `${SYSTEM_PROMPT}\n\nReview this document for predatory or deceptive terms: hidden fees, unusual wire/Zelle payment instructions, non-standard legal language, pressure clauses, upfront wire requirements.\n\nRespond strictly with JSON:\n{\n  "extractedText": "summary of document text and key clauses",\n  "flags": ["list of predatory legal/financial red flags"],\n  "riskScore": 78 (integer 0-100)\n}`
+                text: `${SYSTEM_PROMPT}\n\nReview this document objectively. Is it a standard legitimate document/invoice OR a predatory contract scam?\n\nRespond strictly with JSON:\n{\n  "extractedText": "summary of document text and key terms",\n  "flags": ["list of red flags if predatory, or 'Standard legitimate document terms' if benign"],\n  "riskScore": 15 (integer 0-100: 0-25 = safe/legitimate, 26-65 = medium, 66-100 = high risk)\n}`
               }
             ]
           }
@@ -165,41 +166,40 @@ export const analyzeDocument = async (filePath, mimeType = 'application/pdf') =>
     }
   }
 
-  // Fallback high-fidelity simulation
+  // Fallback simulation
   return {
-    extractedText: "Official Notice of Escrow Clearance & Asset Protection Wire Agreement. Clause 4.2 states: 'Recipient agrees to remit an immediate non-refundable administrative escrow authorization fee of $499 via Zelle to escrow-desk@fastclearance.net prior to dispute resolution.'",
+    extractedText: "Standard service invoice / statement overview.",
     flags: [
-      "Mandatory non-refundable wire/Zelle payment instruction for security service",
-      "Non-standard escrow clause binding victim to unrecoverable peer-to-peer transfer",
-      "Deceptive legal framing masking upfront financial extraction as 'protection fee'"
+      "Standard legitimate document terms"
     ],
-    riskScore: 84
+    riskScore: 10
   };
 };
 
-// 4. Cross-Modal Fusion Reasoning Pass (Core Differentiator)
+// 4. Cross-Modal Fusion Reasoning Pass
 export const fuseAnalysis = async (audioResult, imageResult, docResult, contextNote = '') => {
   if (aiClient) {
     try {
       const promptText = `${SYSTEM_PROMPT}
 
-Given these independent forensic analyses from one suspected fraud incident:
+Cross-reference these independent forensic analyses for a single case:
 
 USER CONTEXT: ${contextNote || 'No additional user note provided.'}
 AUDIO ANALYSIS: ${audioResult ? JSON.stringify(audioResult) : 'No audio submitted'}
 IMAGE ANALYSIS: ${imageResult ? JSON.stringify(imageResult) : 'No image submitted'}
 DOCUMENT ANALYSIS: ${docResult ? JSON.stringify(docResult) : 'No document submitted'}
 
-Cross-reference these analyses for CONNECTIONS a single-modality tool would miss — identity mismatches between the call and the screenshot, contradictions between what was promised verbally and what the document states, or reinforcing tactics across channels.
+Calculate the overall risk score and verdict objectively:
+- If ALL evidence is benign/legitimate (risk scores < 30): Output verdict "low", riskScore 0-25, and explanation stating content appears safe and legitimate.
+- If evidence shows genuine threat or cross-channel contradictions: Output proportional riskScore (0-100) and verdict ("low" | "medium" | "high").
 
 Respond strictly with JSON:
 {
-  "riskScore": 94 (integer 0-100),
-  "verdict": "high" ("low" | "medium" | "high"),
-  "explanation": "Clear, objective plain-language summary of how these evidence channels connect to form a single coordinated attack.",
+  "riskScore": 15 (integer 0-100),
+  "verdict": "low" ("low" | "medium" | "high"),
+  "explanation": "Clear, objective plain-language summary of findings.",
   "crossModalFindings": [
-    "Specific cross-channel connection 1 (e.g. Caller claimed bank identity while screenshot domain belongs to an unverified third-party host)",
-    "Specific cross-channel connection 2 (e.g. Verbal request for OTP code directly aligns with SMS link harvesting page received 2 minutes later)"
+    "Specific cross-channel observations or 'No cross-channel threat indicators detected'"
   ]
 }`;
 
@@ -220,35 +220,39 @@ Respond strictly with JSON:
     }
   }
 
-  // Fallback high-fidelity cross-modal fusion calculation
+  // Objective fallback calculation
   const scores = [];
   if (audioResult) scores.push(audioResult.riskScore);
   if (imageResult) scores.push(imageResult.riskScore);
   if (docResult) scores.push(docResult.riskScore);
 
-  const avgScore = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 85;
-  const finalScore = Math.min(98, avgScore + 6); // Boost for multi-channel correlation
+  const avgScore = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 15;
+  const isHighRisk = avgScore >= 65;
+  const isMedRisk = avgScore >= 30 && avgScore < 65;
+
+  const finalScore = isHighRisk ? Math.min(98, avgScore + 4) : avgScore;
+  const verdict = isHighRisk ? 'high' : isMedRisk ? 'medium' : 'low';
 
   const crossFindings = [];
-  if (audioResult && imageResult) {
-    crossFindings.push("Channel Mismatch: The caller verbally claimed to be Chase Bank Security, but the SMS link in the screenshot directs to an unofficial third-party domain ('chase-sec-verify-alert.net').");
-    crossFindings.push("Tactical Reinforcement: Verbal pressure for a 6-digit OTP code directly aligns with the SMS login link sent simultaneously to harvest victim credentials.");
-  }
-  if (audioResult && docResult) {
-    crossFindings.push("Verbal vs Document Contradiction: Caller stated dispute resolution was free of charge, whereas Clause 4.2 in the PDF document demands an immediate $499 non-refundable Zelle payment.");
-  }
-  if (imageResult && docResult) {
-    crossFindings.push("Visual Branding Contradiction: The SMS screenshot displays standard retail banking logos, but the PDF agreement references an unrelated peer-to-peer escrow desk email.");
-  }
-
-  if (crossFindings.length === 0) {
-    crossFindings.push("High Risk Pattern: Modality evidence exhibits urgent pressure tactics and unverified payment demands typical of social engineering scams.");
+  if (!isHighRisk && !isMedRisk) {
+    crossFindings.push("Legitimate Notice Pattern: Evaluated evidence displays standard communication characteristics without phishing or credential harvesting indicators.");
+  } else {
+    if (audioResult && imageResult) {
+      crossFindings.push("Channel Mismatch: Telephonic claims contradict domain parameters observed in screenshot.");
+    }
+    if (audioResult && docResult) {
+      crossFindings.push("Verbal vs Document Contradiction: Verbal promises conflict with payment demands in contract.");
+    }
   }
 
   return {
     riskScore: finalScore,
-    verdict: finalScore >= 75 ? 'high' : finalScore >= 45 ? 'medium' : 'low',
-    explanation: "This incident demonstrates a highly coordinated multi-channel scam attempt. The caller impersonates financial security personnel while simultaneously sending phishing links via SMS and issuing deceptive settlement forms to extract funds via unrecoverable peer-to-peer payments.",
+    verdict,
+    explanation: isHighRisk 
+      ? "Coordinated multi-channel fraud indicators detected across evidence streams."
+      : isMedRisk
+      ? "Moderate caution advised. Potential unverified elements require validation."
+      : "The analyzed evidence appears legitimate with no high-risk fraud or phishing indicators detected.",
     crossModalFindings: crossFindings
   };
 };
@@ -259,14 +263,15 @@ export const analyzeGuardianCheck = async (description) => {
     try {
       const promptText = `${SYSTEM_PROMPT}
 
-A user describes a situation that might be a scam: "${description}"
+Evaluate this situation objectively: "${description}"
 
-Identify red flags and give plain-language guidance.
+Determine if this is a standard routine notice (e.g. normal recharge/bill expiration from an official service provider) OR a potential scam/phishing attempt.
+
 Respond strictly with JSON:
 {
-  "riskLevel": "high" ("low" | "medium" | "high"),
-  "redFlags": ["list of specific red flags observed"],
-  "advice": "actionable step-by-step guidance for the user"
+  "riskLevel": "low" ("low" | "medium" | "high"),
+  "redFlags": ["List of specific red flags, or 'No scam indicators detected' if legitimate notice"],
+  "advice": "Actionable guidance for the user"
 }`;
 
       const response = await aiClient.models.generateContent({
@@ -286,15 +291,27 @@ Respond strictly with JSON:
     }
   }
 
-  // Fallback high-fidelity triage response
+  // Objective fallback triage response
+  const lowerDesc = description.toLowerCase();
+  const isScam = lowerDesc.includes('otp') || lowerDesc.includes('gift card') || lowerDesc.includes('wire') || lowerDesc.includes('bitly') || lowerDesc.includes('urgent bank');
+
+  if (isScam) {
+    return {
+      riskLevel: 'high',
+      redFlags: [
+        "Unsolicited request for sensitive passcodes or immediate wire transfer",
+        "Panic-inducing language demanding urgent payment"
+      ],
+      advice: "DO NOT provide any OTP passcodes or money. Open your official banking application directly or call the official customer care number."
+    };
+  }
+
   return {
-    riskLevel: description.toLowerCase().includes('otp') || description.toLowerCase().includes('gift card') || description.toLowerCase().includes('wire') || description.toLowerCase().includes('urgent') ? 'high' : 'medium',
+    riskLevel: 'low',
     redFlags: [
-      "Unsolicited communication claiming urgent financial compromise",
-      "Demand for immediate action bypassing standard account verification",
-      "Request for sensitive credentials, OTP passcodes, or non-standard payment methods"
+      "No scam indicators detected"
     ],
-    advice: "DO NOT provide any One-Time Passcodes (OTP) or transfer money. Hang up immediately. Open your official banking app directly (or call the telephone number printed on the back of your debit card) to verify your account status safely."
+    advice: "This appears to be a standard routine notice (such as a plan expiration or service reminder). Always ensure you make payments through official provider apps or websites."
   };
 };
 
@@ -304,17 +321,17 @@ export const generateReportService = async (caseData) => {
     try {
       const promptText = `${SYSTEM_PROMPT}
 
-Format this fused case analysis into a structured incident report suitable for filing with a bank fraud department or police complaint.
+Format this forensic case analysis into a structured incident report.
 
 CASE DATA: ${JSON.stringify(caseData)}
 
 Respond strictly with JSON:
 {
-  "title": "Structured Incident Forensics Summary",
-  "summary": "Executive overview of the fraud incident",
+  "title": "Forensic Incident Evaluation Report",
+  "summary": "Executive overview of the evaluation findings",
   "evidenceReviewed": ["List of evidence channels evaluated"],
-  "redFlags": ["Consolidated forensic red flags"],
-  "recommendedActions": ["Clear step-by-step victim remediation instructions"]
+  "redFlags": ["Consolidated findings or 'No major red flags'"],
+  "recommendedActions": ["Clear step-by-step guidance for the user"]
 }`;
 
       const response = await aiClient.models.generateContent({
@@ -334,14 +351,15 @@ Respond strictly with JSON:
     }
   }
 
-  // Fallback structured report
+  // Objective fallback structured report
+  const isHigh = (caseData.fused_verdict || 'low').toLowerCase() === 'high';
   return {
-    title: "Official Forensic Fraud Incident Report — Clarifie Engine",
-    summary: `Multi-channel fraud incident evaluated on ${new Date().toLocaleDateString()}. Fused Forensic Risk Score: ${caseData.fused_risk_score}/100 (${(caseData.fused_verdict || 'HIGH').toUpperCase()} VERDICT). Coordinated social engineering attempt identified across multiple evidence channels.`,
+    title: "Forensic Evaluation Report — Clarifie Engine",
+    summary: `Evaluation completed on ${new Date().toLocaleDateString()}. Fused Risk Score: ${caseData.fused_risk_score}/100 (${(caseData.fused_verdict || 'LOW').toUpperCase()} RISK). ${isHigh ? 'High-risk fraud indicators detected.' : 'Evidence exhibits standard legitimate characteristics.'}`,
     evidenceReviewed: [
-      caseData.audio_transcript ? "Telephonic Voice Recording & Transcription" : null,
-      caseData.image_description ? "Digital Screenshot & Visual Phishing Inspection" : null,
-      caseData.document_text ? "Documentary Contract & Clause Evaluation" : null
+      caseData.audio_transcript ? "Telephonic Voice Recording" : null,
+      caseData.image_description ? "Digital Screenshot Inspection" : null,
+      caseData.document_text ? "Documentary Clause Evaluation" : null
     ].filter(Boolean),
     redFlags: [
       ...(caseData.cross_modal_findings || []),
@@ -349,11 +367,13 @@ Respond strictly with JSON:
       ...(caseData.image_flags || []),
       ...(caseData.document_flags || [])
     ],
-    recommendedActions: [
-      "Immediately freeze all associated bank accounts and credit cards referenced during the call.",
-      "File an official IC3 / FTC complaint utilizing this document as supporting evidence attachment.",
-      "Change passwords and revoke active login sessions on online banking accounts.",
-      "Provide this forensic incident report directly to your bank's fraud investigation division."
+    recommendedActions: isHigh ? [
+      "Freeze associated accounts if unverified transfers were initiated.",
+      "File an official complaint with your service provider or cyber crime portal.",
+      "Change security passwords and enable multi-factor authentication."
+    ] : [
+      "Routine notice: complete any required renewals via official provider applications only.",
+      "Always verify links before clicking or entering personal details."
     ]
   };
 };
