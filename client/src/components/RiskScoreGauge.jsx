@@ -30,12 +30,12 @@ export const RiskScoreGauge = ({ score = 85, verdict = 'high' }) => {
     }
     return {
       color: '#22C55E',
-      label: 'LOW RISK VERDICT',
-      bgColor: 'bg-risk-low/10',
-      borderColor: 'border-risk-low/40',
-      textColor: 'text-risk-low',
+      label: 'NORMAL / SAFE (LOW RISK)',
+      bgColor: 'bg-emerald-500/10',
+      borderColor: 'border-emerald-500/40',
+      textColor: 'text-emerald-400',
       icon: ShieldCheck,
-      description: 'Standard language observed. No high-risk cross-channel signals detected.'
+      description: 'Standard routine notice observed. No fraud or phishing indicators detected.'
     };
   };
 
