@@ -26,9 +26,14 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+import os from 'os';
+
 // Static directory for file downloads/previews and root landing page
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
-app.use(express.static(path.join(__dirname, '../../')));
+const staticUploadsDir = (process.env.VERCEL === '1' || process.env.NODE_ENV === 'production')
+  ? os.tmpdir()
+  : path.join(__dirname, '../uploads');
+
+app.use('/uploads', express.static(staticUploadsDir));
 
 // Health check
 app.get('/api/health', (req, res) => {
