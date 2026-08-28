@@ -45,7 +45,7 @@ export const analyzeAudio = async (filePath, mimeType = 'audio/mp3') => {
       const base64Data = fileBuffer.toString('base64');
 
       const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: [
           {
             role: 'user',
@@ -92,7 +92,7 @@ export const analyzeImage = async (filePath, mimeType = 'image/png') => {
       const base64Data = fileBuffer.toString('base64');
 
       const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: [
           {
             role: 'user',
@@ -139,7 +139,7 @@ export const analyzeDocument = async (filePath, mimeType = 'application/pdf') =>
       const base64Data = fileBuffer.toString('base64');
 
       const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: [
           {
             role: 'user',
@@ -204,7 +204,7 @@ Respond strictly with JSON:
 }`;
 
       const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: [
           {
             role: 'user',
@@ -270,7 +270,7 @@ Respond strictly with JSON:
 }`;
 
       const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: [
           {
             role: 'user',
@@ -318,7 +318,7 @@ Respond strictly with JSON:
 }`;
 
       const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash',
         contents: [
           {
             role: 'user',
