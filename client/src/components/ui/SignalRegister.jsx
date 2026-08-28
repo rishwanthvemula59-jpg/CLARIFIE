@@ -1,11 +1,13 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const SignalRegister = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -211,13 +213,15 @@ export const SignalRegister = () => {
               <div className="field absolute left-[62px] top-[315px] w-[489px] h-[58px] rounded-[12px] bg-[#fafafa] border-[1.5px] border-[#acacae] flex items-center">
                 <input
                   type="text"
+                  name="username"
+                  id="username"
                   required
                   autoComplete="username"
                   aria-label="Choose Username"
                   placeholder="Choose Username (e.g. Rishwanth)"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full h-full border-none bg-transparent px-[19px] text-[15.68px] tracking-[-0.188px] text-black outline-none placeholder-[#606060]"
+                  className="flex-1 h-full border-none bg-transparent pl-[19px] pr-[19px] text-[15.68px] tracking-[-0.188px] text-black outline-none placeholder-[#606060]"
                 />
               </div>
 
@@ -225,28 +229,40 @@ export const SignalRegister = () => {
               <div className="field absolute left-[62px] top-[385px] w-[489px] h-[58px] rounded-[12px] bg-[#fafafa] border-[1.5px] border-[#acacae] flex items-center">
                 <input
                   type="email"
+                  name="email"
+                  id="email"
                   required
                   autoComplete="email"
                   aria-label="Email address"
                   placeholder="Eg. johndoe@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-full border-none bg-transparent px-[19px] text-[15.68px] tracking-[-0.188px] text-black outline-none placeholder-[#606060]"
+                  className="flex-1 h-full border-none bg-transparent pl-[19px] pr-[19px] text-[15.68px] tracking-[-0.188px] text-black outline-none placeholder-[#606060]"
                 />
               </div>
 
               {/* Input: Password */}
-              <div className="field absolute left-[62px] top-[455px] w-[489px] h-[58px] rounded-[12px] bg-[#f9f9f9] border-none flex items-center">
+              <div className="field absolute left-[62px] top-[455px] w-[489px] h-[58px] rounded-[12px] bg-[#f9f9f9] border-none flex items-center pr-[12px]">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
                   required
                   autoComplete="new-password"
                   aria-label="Password"
                   placeholder="Create Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-full border-none bg-transparent px-[19px] text-[17.29px] tracking-[-0.698px] text-black outline-none placeholder-[#606060]"
+                  className="flex-1 h-full border-none bg-transparent pl-[19px] pr-[12px] text-[17.29px] tracking-[-0.698px] text-black outline-none placeholder-[#606060]"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="p-2 text-[#606060] hover:text-black transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
 
               {/* Submit Button */}
