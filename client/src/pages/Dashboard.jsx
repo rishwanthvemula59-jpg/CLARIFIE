@@ -84,7 +84,7 @@ export const Dashboard = () => {
             Forensic Workspace
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed font-medium">
-            Multimodal Fraud Fusion Engine Analyzing Audio Calls, Screenshots, and PDF Contracts Backed by PostgreSQL RLS.
+            Multimodal Fraud Fusion Engine Analyzing Audio Calls, Screenshots, and PDF Contracts.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">

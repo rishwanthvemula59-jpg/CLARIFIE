@@ -24,7 +24,7 @@ export const LandingPage = () => {
             Unified Threat Forensics Across 3 Modalities
           </h2>
           <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium max-w-2xl mx-auto">
-            Clarifie Integrates Google Gemini AI Inference with PostgreSQL RLS to Instantly Isolate Fraudulent Behavior Before Financial Loss Occurs.
+            Clarifie Integrates Google Gemini AI Inference to Instantly Isolate Fraudulent Behavior Before Financial Loss Occurs.
           </p>
         </div>
 
