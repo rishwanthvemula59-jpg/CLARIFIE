@@ -10,8 +10,6 @@ import {
 } from 'lucide-react';
 
 export const VisualDiscoveryView = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-
   const MOCK_MATCHES = [
     {
       sku: 'SKU-APX-8901',
@@ -32,26 +30,26 @@ export const VisualDiscoveryView = () => {
   ];
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto font-['Plus_Jakarta_Sans'] text-[#1C1A17]">
       
       {/* Header */}
-      <div className="p-6 lg:p-8 rounded-3xl bg-gradient-to-r from-indigo-950/40 via-black to-black border border-indigo-500/20 shadow-2xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="p-6 lg:p-8 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-mono text-indigo-300 font-bold">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#2563EB]/10 border border-[#2563EB]/30 text-xs font-mono text-[#2563EB] font-bold">
             <Search className="w-3.5 h-3.5" />
             <span>Surface 4 • Visual Product Discovery Engine</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white font-heading">
+          <h1 className="text-3xl font-extrabold tracking-tight text-[#1C1A17] font-heading">
             pgvector Similarity Search
           </h1>
-          <p className="text-sm text-slate-300 font-medium leading-relaxed">
+          <p className="text-sm text-[#6B665E] font-medium leading-relaxed">
             Upload any unedited real-world photo or screenshot to instantly search catalog items using 768-dimensional CLIP/SigLIP vector embeddings.
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center shrink-0 min-w-[140px]">
-          <span className="text-2xl font-mono font-extrabold text-indigo-400">768-d</span>
-          <p className="text-[10px] text-slate-400 font-mono mt-0.5 uppercase">pgvector Index</p>
+        <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] text-center shrink-0 min-w-[140px]">
+          <span className="text-2xl font-mono font-extrabold text-[#2563EB]">768-d</span>
+          <p className="text-[10px] text-[#6B665E] font-mono mt-0.5 uppercase font-bold">pgvector Index</p>
         </div>
       </div>
 
@@ -59,35 +57,35 @@ export const VisualDiscoveryView = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-4">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-300">
+          <div className="p-6 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm space-y-4">
+            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-[#1C1A17]">
               Upload Query Photo
             </h2>
-            <div className="border-2 border-dashed border-white/20 hover:border-indigo-500/50 rounded-2xl p-8 text-center bg-black/40 transition-all cursor-pointer group">
-              <UploadCloud className="w-10 h-10 text-indigo-400 mx-auto group-hover:scale-110 transition-transform mb-3" />
-              <p className="text-xs font-bold text-white">Drop Photo or Screenshot Here</p>
-              <p className="text-[11px] text-slate-400 mt-1">Queries against all verified evidence vectors</p>
+            <div className="border-2 border-dashed border-[#E2DDD5] hover:border-[#2563EB] rounded-2xl p-8 text-center bg-[#FAF8F5] transition-all cursor-pointer group">
+              <UploadCloud className="w-10 h-10 text-[#2563EB] mx-auto group-hover:scale-110 transition-transform mb-3" />
+              <p className="text-xs font-bold text-[#1C1A17]">Drop Photo or Screenshot Here</p>
+              <p className="text-[11px] text-[#6B665E] mt-1 font-medium">Queries against all verified evidence vectors</p>
             </div>
           </div>
         </div>
 
         <div className="lg:col-span-7 space-y-6">
-          <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-6">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-300">
+          <div className="p-6 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm space-y-6">
+            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-[#1C1A17]">
               Vector Similarity Results
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {MOCK_MATCHES.map((match) => (
-                <div key={match.sku} className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-3">
-                  <img src={match.image} alt={match.title} className="w-full h-40 object-cover rounded-xl border border-white/10" />
+                <div key={match.sku} className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] space-y-3">
+                  <img src={match.image} alt={match.title} className="w-full h-40 object-cover rounded-xl border border-[#E2DDD5]" />
                   <div>
                     <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-indigo-400 font-bold">{match.sku}</span>
-                      <span className="text-emerald-400 font-extrabold">{Math.round(match.similarityScore * 100)}% Match</span>
+                      <span className="text-[#2563EB] font-bold">{match.sku}</span>
+                      <span className="text-[#2D6A4F] font-extrabold">{Math.round(match.similarityScore * 100)}% Match</span>
                     </div>
-                    <h3 className="text-sm font-bold text-white mt-1">{match.title}</h3>
-                    <p className="text-xs text-slate-400 mt-1 font-mono">{match.price}</p>
+                    <h3 className="text-sm font-bold text-[#1C1A17] mt-1">{match.title}</h3>
+                    <p className="text-xs text-[#6B665E] mt-1 font-mono">{match.price}</p>
                   </div>
                 </div>
               ))}

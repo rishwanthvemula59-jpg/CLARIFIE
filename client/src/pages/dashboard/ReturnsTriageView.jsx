@@ -86,32 +86,32 @@ export const ReturnsTriageView = () => {
   });
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto font-['Plus_Jakarta_Sans'] text-[#1C1A17]">
       
-      {/* Surface Banner */}
-      <div className="p-6 lg:p-8 rounded-3xl bg-gradient-to-r from-emerald-950/40 via-black to-black border border-emerald-500/20 shadow-2xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+      {/* Surface Banner — Burrito Madre Warm Terracotta Light Banner */}
+      <div className="p-6 lg:p-8 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 font-bold">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#D94A26]/10 border border-[#D94A26]/30 text-xs font-mono text-[#D94A26] font-bold">
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Surface 1 • Warehouse & Ops Ground Truth</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white font-heading">
+          <h1 className="text-3xl font-extrabold tracking-tight text-[#1C1A17] font-heading">
             Returns & Damage Triage
           </h1>
-          <p className="text-sm text-slate-300 font-medium leading-relaxed">
+          <p className="text-sm text-[#6B665E] font-medium leading-relaxed">
             Photo-verify customer returns, assess damage severity, detect fraudulent serial swaps, and route items automatically to restock, refurb, or denial queues.
           </p>
         </div>
 
         {/* Quick Stats */}
         <div className="flex items-center gap-4 shrink-0">
-          <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center min-w-[110px]">
-            <span className="text-2xl font-mono font-extrabold text-emerald-400">94.2%</span>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5 uppercase">Auto-Approve Rate</p>
+          <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] text-center min-w-[110px]">
+            <span className="text-2xl font-mono font-extrabold text-[#2D6A4F]">94.2%</span>
+            <p className="text-[10px] text-[#6B665E] font-mono mt-0.5 uppercase font-bold">Auto-Approve Rate</p>
           </div>
-          <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center min-w-[110px]">
-            <span className="text-2xl font-mono font-extrabold text-rose-400">$18,450</span>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5 uppercase">Fraud Prevented</p>
+          <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] text-center min-w-[110px]">
+            <span className="text-2xl font-mono font-extrabold text-[#D94A26]">$18,450</span>
+            <p className="text-[10px] text-[#6B665E] font-mono mt-0.5 uppercase font-bold">Fraud Prevented</p>
           </div>
         </div>
       </div>
@@ -121,31 +121,31 @@ export const ReturnsTriageView = () => {
         
         {/* Left: Photo Upload & Verification Zone */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-4">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+          <div className="p-6 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm space-y-4">
+            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-[#1C1A17] flex items-center justify-between">
               <span>Photo Verification Dropzone</span>
-              <span className="text-emerald-400 text-xs font-normal">Real-Time OCR & Damage VLM</span>
+              <span className="text-[#2D6A4F] text-xs font-normal font-mono">Real-Time OCR & Damage VLM</span>
             </h2>
 
-            <div className="border-2 border-dashed border-white/20 hover:border-emerald-500/50 rounded-2xl p-8 text-center bg-black/40 transition-all cursor-pointer group">
-              <UploadCloud className="w-10 h-10 text-emerald-400 mx-auto group-hover:scale-110 transition-transform mb-3" />
-              <p className="text-xs font-bold text-white">
+            <div className="border-2 border-dashed border-[#E2DDD5] hover:border-[#D94A26] rounded-2xl p-8 text-center bg-[#FAF8F5] transition-all cursor-pointer group">
+              <UploadCloud className="w-10 h-10 text-[#D94A26] mx-auto group-hover:scale-110 transition-transform mb-3" />
+              <p className="text-xs font-bold text-[#1C1A17]">
                 Drag & Drop Return Item Photo
               </p>
-              <p className="text-[11px] text-slate-400 mt-1">
+              <p className="text-[11px] text-[#6B665E] mt-1">
                 Supports JPG, PNG, WEBP • Max 25MB
               </p>
-              <button className="mt-4 px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition-all">
+              <button className="mt-4 px-4 py-2 rounded-xl bg-[#D94A26] hover:bg-[#c03d1c] text-white text-xs font-bold transition-all shadow-md">
                 Select Photo File
               </button>
             </div>
 
-            <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-2 text-xs">
-              <div className="flex items-center justify-between font-mono font-bold text-slate-300">
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] space-y-2 text-xs">
+              <div className="flex items-center justify-between font-mono font-bold text-[#1C1A17]">
                 <span>Product Truth Graph Lineage</span>
-                <span className="text-cyan-400">Linked to SKU Catalog</span>
+                <span className="text-[#D94A26]">Linked to SKU Catalog</span>
               </div>
-              <p className="text-[11px] text-slate-400 leading-normal">
+              <p className="text-[11px] text-[#6B665E] leading-normal font-medium">
                 Every uploaded return photo is embedded via pgvector and reconciled against the master product catalog image to detect color variations and fake swaps.
               </p>
             </div>
@@ -156,13 +156,13 @@ export const ReturnsTriageView = () => {
         <div className="lg:col-span-7 space-y-6">
           
           {/* Controls Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#EAE5DD] shadow-sm">
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-mono text-slate-400 uppercase font-bold">Filter Status:</span>
+              <span className="text-xs font-mono text-[#6B665E] uppercase font-bold">Filter Status:</span>
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="bg-black/60 border border-white/15 rounded-xl px-3 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-emerald-500"
+                className="bg-[#FAF8F5] border border-[#E2DDD5] rounded-xl px-3 py-1.5 text-xs font-mono text-[#1C1A17] focus:outline-none focus:border-[#D94A26]"
               >
                 <option value="all">All Triage Statuses</option>
                 <option value="auto_approved">Auto Approved</option>
@@ -171,8 +171,8 @@ export const ReturnsTriageView = () => {
               </select>
             </div>
 
-            <span className="text-xs font-mono text-slate-400">
-              Showing <b className="text-white">{filteredReturns.length}</b> return inspections
+            <span className="text-xs font-mono text-[#6B665E]">
+              Showing <b className="text-[#1C1A17]">{filteredReturns.length}</b> return inspections
             </span>
           </div>
 
@@ -182,8 +182,8 @@ export const ReturnsTriageView = () => {
               <div
                 key={item.id}
                 onClick={() => setSelectedReturn(item)}
-                className={`p-5 rounded-2xl bg-white/[0.03] border transition-all cursor-pointer hover:border-white/30 space-y-4 ${
-                  item.fraudScore >= 0.5 ? 'border-rose-500/40 bg-rose-950/10' : 'border-white/10'
+                className={`p-5 rounded-2xl bg-white border transition-all cursor-pointer hover:shadow-md space-y-4 ${
+                  item.fraudScore >= 0.5 ? 'border-[#D94A26] bg-[#FFF5F3]' : 'border-[#EAE5DD]'
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
@@ -191,43 +191,43 @@ export const ReturnsTriageView = () => {
                     <img
                       src={item.photoUrl}
                       alt={item.productTitle}
-                      className="w-16 h-16 rounded-xl object-cover border border-white/10"
+                      className="w-16 h-16 rounded-xl object-cover border border-[#E2DDD5]"
                     />
                     <div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-xs font-mono text-emerald-400 font-bold">{item.id}</span>
-                        <span className="text-slate-500">•</span>
-                        <span className="text-xs font-mono text-slate-400">{item.orderId}</span>
+                        <span className="text-xs font-mono text-[#D94A26] font-bold">{item.id}</span>
+                        <span className="text-[#E2DDD5]">•</span>
+                        <span className="text-xs font-mono text-[#6B665E]">{item.orderId}</span>
                       </div>
-                      <h3 className="text-sm font-extrabold text-white mt-0.5">{item.productTitle}</h3>
-                      <p className="text-xs text-slate-400 mt-0.5">{item.customer}</p>
+                      <h3 className="text-sm font-extrabold text-[#1C1A17] mt-0.5">{item.productTitle}</h3>
+                      <p className="text-xs text-[#6B665E] mt-0.5 font-medium">{item.customer}</p>
                     </div>
                   </div>
 
                   {/* Fraud Score & Status Badge */}
                   <div className="text-right shrink-0">
                     {item.fraudScore >= 0.5 ? (
-                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-mono font-bold">
+                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#D94A26]/10 border border-[#D94A26]/30 text-[#D94A26] text-xs font-mono font-bold">
                         <ShieldAlert className="w-3.5 h-3.5" />
                         <span>Fraud Flag ({Math.round(item.fraudScore * 100)}%)</span>
                       </span>
                     ) : (
-                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono font-bold">
+                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#2D6A4F]/10 border border-[#2D6A4F]/30 text-[#2D6A4F] text-xs font-mono font-bold">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         <span>Verified ({Math.round((1 - item.fraudScore) * 100)}%)</span>
                       </span>
                     )}
-                    <p className="text-[10px] font-mono text-slate-400 mt-1">{item.timestamp}</p>
+                    <p className="text-[10px] font-mono text-[#6B665E] mt-1">{item.timestamp}</p>
                   </div>
                 </div>
 
                 {/* Damage Finding Details */}
-                <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs">
-                  <div className="flex items-center justify-between font-mono font-bold text-slate-300">
-                    <span>Defect Assessment: <span className="text-white">{item.damageAssessment.defectType}</span></span>
-                    <span className="text-emerald-400">Confidence {Math.round(item.damageAssessment.visionConfidence * 100)}%</span>
+                <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EAE5DD] space-y-1 text-xs">
+                  <div className="flex items-center justify-between font-mono font-bold text-[#1C1A17]">
+                    <span>Defect Assessment: <span className="text-[#D94A26]">{item.damageAssessment.defectType}</span></span>
+                    <span className="text-[#2D6A4F]">Confidence {Math.round(item.damageAssessment.visionConfidence * 100)}%</span>
                   </div>
-                  <p className="text-slate-400 text-[11px]">
+                  <p className="text-[#6B665E] text-[11px] font-medium leading-relaxed">
                     {item.damageAssessment.details}
                   </p>
                 </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   MessageSquare,
   Mic,
-  Image as ImageIcon,
+  ImageIcon,
   Send,
   FileText,
   ShieldCheck,
@@ -14,7 +14,6 @@ import {
 
 export const SupportAgentView = () => {
   const [activeTab, setActiveTab] = useState('chat');
-  const [inputText, setInputText] = useState('');
 
   const MOCK_TICKETS = [
     {
@@ -31,26 +30,26 @@ export const SupportAgentView = () => {
   ];
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto font-['Plus_Jakarta_Sans'] text-[#1C1A17]">
       
       {/* Surface Header */}
-      <div className="p-6 lg:p-8 rounded-3xl bg-gradient-to-r from-cyan-950/40 via-black to-black border border-cyan-500/20 shadow-2xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="p-6 lg:p-8 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-mono text-cyan-300 font-bold">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#D94A26]/10 border border-[#D94A26]/30 text-xs font-mono text-[#D94A26] font-bold">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Surface 2 • Multimodal CX Support Agent</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white font-heading">
+          <h1 className="text-3xl font-extrabold tracking-tight text-[#1C1A17] font-heading">
             Multimodal CX Agent & Policy RAG
           </h1>
-          <p className="text-sm text-slate-300 font-medium leading-relaxed">
+          <p className="text-sm text-[#6B665E] font-medium leading-relaxed">
             Multimodal intake (Text + Photo + Voice Notes) cross-referenced against store return policies and live Product Truth Graph evidence for automated resolution drafting.
           </p>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center shrink-0 min-w-[140px]">
-          <span className="text-2xl font-mono font-extrabold text-cyan-400">1.2s</span>
-          <p className="text-[10px] text-slate-400 font-mono mt-0.5 uppercase">Avg RAG Latency</p>
+        <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] text-center shrink-0 min-w-[140px]">
+          <span className="text-2xl font-mono font-extrabold text-[#D94A26]">1.2s</span>
+          <p className="text-[10px] text-[#6B665E] font-mono mt-0.5 uppercase font-bold">Avg RAG Latency</p>
         </div>
       </div>
 
@@ -59,25 +58,25 @@ export const SupportAgentView = () => {
         
         {/* Left: Active Ticket & Intake Panel */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-6">
+          <div className="p-6 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm space-y-6">
             
             {/* Customer Ticket Context */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="flex items-center justify-between border-b border-[#EAE5DD] pb-4">
               <div>
-                <span className="text-xs font-mono text-cyan-400 font-bold">Ticket #TICK-4412</span>
-                <h2 className="text-lg font-extrabold text-white">Sarah Jenkins • UltraLight Trail Running Shoe</h2>
+                <span className="text-xs font-mono text-[#D94A26] font-bold">Ticket #TICK-4412</span>
+                <h2 className="text-lg font-extrabold text-[#1C1A17]">Sarah Jenkins • UltraLight Trail Running Shoe</h2>
               </div>
-              <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold">
+              <span className="px-3 py-1 rounded-full bg-[#2D6A4F]/10 border border-[#2D6A4F]/30 text-[#2D6A4F] text-xs font-mono font-bold">
                 Auto-Resolution Ready
               </span>
             </div>
 
             {/* Multimodal Input Selector */}
-            <div className="flex items-center space-x-3 p-1 bg-black/60 rounded-xl border border-white/10 w-fit text-xs font-mono">
+            <div className="flex items-center space-x-3 p-1 bg-[#FAF8F5] rounded-xl border border-[#EAE5DD] w-fit text-xs font-mono">
               <button
                 onClick={() => setActiveTab('chat')}
                 className={`px-3 py-1.5 rounded-lg flex items-center space-x-2 transition-all ${
-                  activeTab === 'chat' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'text-slate-400 hover:text-white'
+                  activeTab === 'chat' ? 'bg-[#D94A26] text-white font-bold' : 'text-[#6B665E] hover:text-[#1C1A17]'
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5" />
@@ -86,7 +85,7 @@ export const SupportAgentView = () => {
               <button
                 onClick={() => setActiveTab('voice')}
                 className={`px-3 py-1.5 rounded-lg flex items-center space-x-2 transition-all ${
-                  activeTab === 'voice' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'text-slate-400 hover:text-white'
+                  activeTab === 'voice' ? 'bg-[#D94A26] text-white font-bold' : 'text-[#6B665E] hover:text-[#1C1A17]'
                 }`}
               >
                 <Mic className="w-3.5 h-3.5" />
@@ -96,23 +95,23 @@ export const SupportAgentView = () => {
 
             {/* Simulated Chat History */}
             <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
-              <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5 space-y-2 text-xs">
-                <div className="flex items-center justify-between text-slate-400 font-mono">
+              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] space-y-2 text-xs">
+                <div className="flex items-center justify-between text-[#6B665E] font-mono">
                   <span>Customer (Sarah Jenkins)</span>
                   <span>10:42 AM</span>
                 </div>
-                <p className="text-slate-200 leading-relaxed font-medium">
+                <p className="text-[#1C1A17] leading-relaxed font-medium">
                   "Hi, I received my trail shoes today but the blue color is much brighter than shown on your site image. I would like to exchange them for the black pair."
                 </p>
               </div>
 
               {/* Cross-Surface Truth Indicator */}
-              <div className="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 space-y-2 text-xs">
-                <div className="flex items-center space-x-2 text-cyan-400 font-mono font-bold">
+              <div className="p-4 rounded-2xl bg-[#FFF5F3] border border-[#D94A26]/30 space-y-2 text-xs">
+                <div className="flex items-center space-x-2 text-[#D94A26] font-mono font-bold">
                   <Zap className="w-4 h-4" />
                   <span>Truth Graph Evidence Cross-Link</span>
                 </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
+                <p className="text-[#1C1A17] text-[11px] leading-relaxed font-medium">
                   {MOCK_TICKETS[0].crossSurfaceEvidence}
                 </p>
               </div>
@@ -123,33 +122,33 @@ export const SupportAgentView = () => {
 
         {/* Right: Policy RAG & AI Resolution Panel */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-6">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+          <div className="p-6 rounded-3xl bg-white border border-[#EAE5DD] shadow-sm space-y-6">
+            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-[#1C1A17] flex items-center justify-between">
               <span>Claude 3.7 Resolution Draft</span>
-              <span className="text-cyan-400 text-xs font-normal">Policy RAG Match</span>
+              <span className="text-[#2D6A4F] text-xs font-mono">Policy RAG Match</span>
             </h2>
 
             {/* Policy Citation */}
-            <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-2 text-xs">
-              <div className="flex items-center space-x-2 text-amber-400 font-mono font-bold">
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#EAE5DD] space-y-2 text-xs">
+              <div className="flex items-center space-x-2 text-[#D97706] font-mono font-bold">
                 <FileText className="w-3.5 h-3.5" />
                 <span>Policy Citation</span>
               </div>
-              <p className="text-slate-300 font-medium">
+              <p className="text-[#1C1A17] font-medium">
                 {MOCK_TICKETS[0].policyCitation}
               </p>
             </div>
 
             {/* Suggested Resolution Draft */}
-            <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-3 text-xs">
-              <div className="flex items-center justify-between text-emerald-400 font-mono font-bold">
+            <div className="p-4 rounded-2xl bg-[#F0FDF4] border border-[#2D6A4F]/30 space-y-3 text-xs">
+              <div className="flex items-center justify-between text-[#2D6A4F] font-mono font-bold">
                 <span>Suggested Action</span>
                 <span>Auto-Approve Eligible</span>
               </div>
-              <p className="text-slate-200 font-bold">
+              <p className="text-[#1C1A17] font-bold">
                 {MOCK_TICKETS[0].suggestedAction}
               </p>
-              <button className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs transition-all shadow-lg">
+              <button className="w-full py-2.5 rounded-xl bg-[#2D6A4F] hover:bg-[#23533e] text-white font-extrabold text-xs transition-all shadow-md">
                 Approve & Send Customer Resolution
               </button>
             </div>
