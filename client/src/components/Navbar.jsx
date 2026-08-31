@@ -8,8 +8,8 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Hide global navbar ONLY on landing page when unauthenticated (SecurifyHero handles landing page header)
-  if (!isAuthenticated && location.pathname === '/') {
+  // Hide global navbar on landing page when unauthenticated AND on dashboard routes (DashboardLayout renders its own unified header)
+  if ((!isAuthenticated && location.pathname === '/') || location.pathname.startsWith('/dashboard')) {
     return null;
   }
 
