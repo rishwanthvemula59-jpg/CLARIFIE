@@ -12,6 +12,7 @@ import { CaseResult } from './pages/CaseResult';
 import { ReportView } from './pages/ReportView';
 import { Guardian } from './pages/Guardian';
 import { ScamPatterns } from './pages/ScamPatterns';
+import { DashboardLayout } from './pages/dashboard/DashboardLayout';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -51,10 +52,10 @@ export const App = () => {
 
               {/* Protected Workspace Routes */}
               <Route
-                path="/dashboard"
+                path="/dashboard/*"
                 element={
                   <ProtectedRoute>
-                    <Dashboard />
+                    <DashboardLayout />
                   </ProtectedRoute>
                 }
               />
